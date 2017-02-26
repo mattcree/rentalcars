@@ -8,7 +8,7 @@ import org.junit.Test;
 public class NameTest {
 
     @Test
-    public void createNewNameShouldCreateValidName() {
+    public void createNewNameShouldCreateValidNameObject() {
         Name name = createName();
         Assert.assertNotNull(name);
     }
@@ -32,7 +32,7 @@ public class NameTest {
     }
 
     @Test
-    public void toStringShouldReturnNameAsString() {
+    public void toStringShouldReturnFullNameAsString() {
         Name name = createName();
         Assert.assertTrue(name.toString().equals(firstName + " " + lastName));
     }
