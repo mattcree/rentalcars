@@ -1,7 +1,7 @@
 /**
  * Created by Cree on 24/02/2017.
  */
-public class SmallCar extends Car {
+public class SmallCar extends CommonCar {
 
 /*    private static final int TANK_CAPACITY = 49;
     private RegistrationNumber registrationNumber;

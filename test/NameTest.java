@@ -39,8 +39,8 @@ public class NameTest {
 
 
     //Fields and constructor for tests
-    private String firstName = "Barry";
-    private String lastName = "Bant";
+    private String firstName = "barry";
+    private String lastName = "bant";
 
     private Name createName() {
         return new Name(firstName, lastName);

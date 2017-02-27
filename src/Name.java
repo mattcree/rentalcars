@@ -20,7 +20,7 @@ public class Name {
     }
 
     public String getInitials() {
-        return firstName.substring(0,1) + lastName.substring(0,1);
+        return (firstName.substring(0,1) + lastName.substring(0,1)).toUpperCase();
     }
 
     public String toString() {

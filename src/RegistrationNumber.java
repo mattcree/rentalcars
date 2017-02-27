@@ -7,6 +7,8 @@ public class RegistrationNumber {
 
     private static final AtomicInteger numbersCount = new AtomicInteger(0);
     private static final AtomicInteger letterCount = new AtomicInteger('a');
+    private static final char letterLimit = 'z';
+    private static final int numberLimit = 9999;
 
     private char letter;
     private int numbers;
@@ -26,8 +28,6 @@ public class RegistrationNumber {
         }
         return new RegistrationNumber((char)letterCount.get(), numbersCount.getAndIncrement());
     }
-
-
 
     public char getLetter() {
         return this.letter;
@@ -59,4 +59,5 @@ public class RegistrationNumber {
     static void setLettersCount(int newLetter) {
         letterCount.set(newLetter);
     }
+
 }
