@@ -2,7 +2,7 @@
  * Created by Cree on 26/02/2017.
  */
 public interface Vehicle {
-    public RegistrationNumber getRegistration();
+    public RegistrationNumber getRegNumber();
     public int getCapacity();
     public int getFuelRemaining();
     public boolean isFull();

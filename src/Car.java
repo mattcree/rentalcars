@@ -2,17 +2,42 @@
  * Created by Cree on 26/02/2017.
  */
 public abstract class Car {
-
+/*
     private RegistrationNumber registrationNumber;
-    private int fuelRemaining;
     private boolean rentalStatus;
+    private int tankCapacity;
+    private int fuelRemaining;
 
-    public RegistrationNumber getRegistration();
-    public int getCapacity();
-    public int getFuelRemaining();
-    public boolean isFull();
-    public boolean isRented();
-    public boolean addFuel(int amount);
+
+    public Car(RegistrationNumber reg, int capacity) {
+        this.registrationNumber = reg;
+        this.rentalStatus = false;
+        this.tankCapacity = capacity;
+        this.fuelRemaining = capacity;
+    }
+
+    public RegistrationNumber getRegistration() {
+        return registrationNumber;
+    }
+
+    public int getFuelRemaining() {
+        return fuelRemaining;
+    }
+
+    public boolean isFull() {
+        return (this.tankCapacity == this.fuelRemaining);
+    }
+
+    public boolean isRented() {
+        return rentalStatus;
+    }
+
+    public boolean addFuel(int amount) {
+
+    }
+
+    public abstract int drive();
+    public abstract int getCapacity();*/
 
 
 }

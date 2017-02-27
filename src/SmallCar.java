@@ -3,7 +3,7 @@
  */
 public class SmallCar extends Car {
 
-    private static final int TANK_CAPACITY = 49;
+/*    private static final int TANK_CAPACITY = 49;
     private RegistrationNumber registrationNumber;
     private int fuelRemaining;
     private boolean rentalStatus;
@@ -14,6 +14,6 @@ public class SmallCar extends Car {
     public boolean isFull();
     public boolean isRented();
     public boolean addFuel(int amount);
-    public int drive(int distance);
+    public int drive(int distance);*/
 
 }
