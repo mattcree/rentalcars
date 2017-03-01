@@ -61,7 +61,11 @@ public class RegistrationNumberTest {
 
     @Test
     public void toStringShouldReturnRegistrationNumberAsString() {
-
+        RegistrationNumber.setNumbersCount(40);
+        RegistrationNumber.setLettersCount('g');
+        RegistrationNumber reg = RegistrationNumber.getInstance();
+        System.out.println(reg.toString());
+        Assert.assertTrue(reg.toString().equals("g0040"));
     }
 
 
