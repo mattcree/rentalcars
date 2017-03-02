@@ -6,7 +6,7 @@ public interface Car {
     public int getCapacity();
     public int getFuelRemaining();
     public boolean isFull();
-    public boolean isRented();
-    public boolean addFuel(int amount);
-    public int drive(int distance);
+    public boolean isCurrentlyRented();
+    public void addFuel(int amount);
+    public void drive(int distance);
 }

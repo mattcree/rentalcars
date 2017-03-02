@@ -1,7 +1,9 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by Cree on 24/02/2017.
+ * A class representing a car's Registration Number.
+ * A new unique registration number is generated upon
+ * calling 'RegistrationNumber.getInstance()'.
  */
 public class RegistrationNumber {
 

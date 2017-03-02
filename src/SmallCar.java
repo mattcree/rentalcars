@@ -3,17 +3,22 @@
  */
 public class SmallCar extends CommonCar {
 
-/*    private static final int TANK_CAPACITY = 49;
-    private RegistrationNumber registrationNumber;
-    private int fuelRemaining;
-    private boolean rentalStatus;
+    private static final int TANK_CAPACITY = 49;
 
-    public RegistrationNumber getRegistration();
-    public int getCapacity();
-    public int getFuelRemaining();
-    public boolean isFull();
-    public boolean isRented();
-    public boolean addFuel(int amount);
-    public int drive(int distance);*/
+    public SmallCar(){
+        super(TANK_CAPACITY);
+    }
+
+    public int getCapacity() {
+        return TANK_CAPACITY;
+    };
+
+    public boolean isFull() {
+        return (super.getFuelRemaining() == TANK_CAPACITY);
+    };
+
+    public void drive(int distanceInKM) {
+
+    };
 
 }

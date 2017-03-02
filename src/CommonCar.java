@@ -1,43 +1,37 @@
 /**
  * Created by Cree on 26/02/2017.
  */
-public abstract class CommonCar {
-/*
+public abstract class CommonCar implements Car {
     private RegistrationNumber registrationNumber;
-    private boolean rentalStatus;
-    private int tankCapacity;
-    private int fuelRemaining;
+    private boolean currentlyRented;
+    private int fuelAmount;
 
-
-    public CommonCar(RegistrationNumber reg, int capacity) {
-        this.registrationNumber = reg;
-        this.rentalStatus = false;
-        this.tankCapacity = capacity;
-        this.fuelRemaining = capacity;
+    public CommonCar(int fuelAmount) {
+        this.registrationNumber = RegistrationNumber.getInstance();
+        this.currentlyRented = false;
+        this.fuelAmount = fuelAmount;
     }
 
-    public RegistrationNumber getRegistration() {
+    public RegistrationNumber getRegNumber() {
         return registrationNumber;
     }
 
+    public abstract int getCapacity();
+
     public int getFuelRemaining() {
-        return fuelRemaining;
+        return fuelAmount;
+    };
+
+    public abstract boolean isFull();
+
+    public boolean isCurrentlyRented() {
+        return currentlyRented;
     }
 
-    public boolean isFull() {
-        return (this.tankCapacity == this.fuelRemaining);
-    }
+    public void addFuel(int amount) {
+        this.fuelAmount = this.fuelAmount + amount;
+    };
 
-    public boolean isRented() {
-        return rentalStatus;
-    }
-
-    public boolean addFuel(int amount) {
-
-    }
-
-    public abstract int drive();
-    public abstract int getCapacity();*/
-
+    public abstract void drive(int distanceInKM);
 
 }

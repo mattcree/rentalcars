@@ -3,14 +3,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Created by Cree on 24/02/2017.
  */
-public class LicenseNumber {
+public class LicenceNumber {
 
     private static final AtomicInteger SERIAL_NUMBER = new AtomicInteger();
     private String initials;
     private int issueYear;
     private int serial;
 
-    public LicenseNumber (String initials, int year) {
+    public LicenceNumber(String initials, int year) {
         this.initials = initials;
         this.issueYear = year;
         this.serial = SERIAL_NUMBER.getAndIncrement();
