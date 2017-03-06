@@ -3,17 +3,27 @@
  */
 public class RentalCompany {
 
-    /*availableCars(typeOfCar)
+    private static final RentalCompany COMPANY = new RentalCompany();
+
+    private RentalCompany() {
+
+    }
+
+    public static RentalCompany getInstance() {
+        return COMPANY;
+    }
+
+    /*private int availableCars(typeOfCar)
         returns the number of cars of the specified type that are available to rent.
 
-    getRentedCars()
+    private Collection getRentedCars()
         returns a collection of all the cars currently rented out (if any)
 
-    getCar(drivingLicence)
+    private Car getCar(drivingLicence)
         Given a person's driving licence, this method
         returns the car they are currently renting(if any)
 
-    issueCar(drivingLicence, typeOfCar)
+    private boolean issueCar(drivingLicence, typeOfCar)
         Given
             a person's driving licence and
             a specification of the type of car required (small or large),
@@ -32,16 +42,19 @@ public class RentalCompany {
         Note, this does not have to indicate why a car cannot be issued, it simply indicates
         that a car cannot be issued. The rules for determining whether or not a car can be issued are given below.
 
-    terminateRental(drivingLicence)
-    This method terminates the rental contract associated with the given driving licence. In
-    effect, the driver is returning the car. The car is then available for rent by someone else.
-    The method removes the record of the rental from the company's records (disassociating
-    the car from the licence) and returns the amount of fuel in Litres required to fill the car's
-    tank. The driver returning the car must either have returned the car with a full tank or
-    will be liable for the number of Litres required to fill the tank. This terminateRental
-    method is not responsible for managing charges for the required fuel. It just reports the
-    amount of fuel required to fill the tank. This method changes the status of the returned
-    car to not rented.Terminating a non-existent contract has no effect.
+    private int terminateRental(drivingLicence)
+        This method terminates the rental contract associated with the given driving licence.
+        In effect, the driver is returning the car.
+        The car is then available for rent by someone else.
+        The method removes the record of the rental from the company's records (disassociating
+        the car from the licence) and returns the amount of fuel in Litres required to fill the car's
+        tank.
+        The driver returning the car must either have returned the car with a full tank or
+        will be liable for the number of Litres required to fill the tank.
+        This terminateRental method is not responsible for managing charges for the required fuel.
+        It just reports the amount of fuel required to fill the tank.
+        This method changes the status of the returned car to not rented.
+        Terminating a non-existent contract has no effect.
     */
 
 

@@ -1,24 +1,22 @@
 /**
  * Created by Cree on 24/02/2017.
  */
-public class SmallCar extends CommonCar {
+public class SmallCar extends AbstractCar {
 
     private static final int TANK_CAPACITY = 49;
+    private static final int CONSUMPTION_RATE = 20;
+
 
     public SmallCar(){
-        super(TANK_CAPACITY);
+        super(TANK_CAPACITY, CONSUMPTION_RATE);
     }
 
-    public int getCapacity() {
-        return TANK_CAPACITY;
-    };
-
-    public boolean isFull() {
-        return (super.getFuelRemaining() == TANK_CAPACITY);
-    };
-
-    public void drive(int distanceInKM) {
-
-    };
-
+    public int drive(int distanceInKM) {
+        if (this.fuelAmount > 0) {
+            int fuelUsed = AbstractCar.consumptionCalculator(distanceInKM, CONSUMPTION_RATE);
+            this.fuelAmount = this.fuelAmount - fuelUsed;
+            return fuelUsed;
+        }
+        return -1;
+    }
 }
