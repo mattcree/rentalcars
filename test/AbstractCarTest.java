@@ -90,21 +90,64 @@ public class AbstractCarTest {
     }
 
     @Test
-    public void addFuelShouldReturnAmountOfFuelAddedIfTankIsEmpty() {
+    public void addFuelShouldReturnZeroIfTankIsNotFullAndCarIsNotRented() {
         Car car = AbstractCarTestStub.getInstance();
+        car.setRentalStatus(false);
         int amountToRemove = 10;
         car.drive(amountToRemove);
         int amountToAdd = 5;
         car.addFuel(amountToAdd);
-        Assert.assertTrue(car.getFuelRemaining()
+        Assert.assertFalse(car.getFuelRemaining()
                                     == car.getCapacity()
                                     - amountToRemove
                                     + amountToAdd);
     }
 
+    @Test
+    public void addFuelShouldReturnAmountOfFuelAddedIfTankIsNotFullAndCarIsRented() {
+        Car car = AbstractCarTestStub.getInstance();
+        car.setRentalStatus(true);
+        int amountToRemove = 10;
+        car.drive(amountToRemove);
+        int amountToAdd = 5;
+        car.addFuel(amountToAdd);
+        Assert.assertTrue(car.getFuelRemaining()
+                == car.getCapacity()
+                - amountToRemove
+                + amountToAdd);
+    }
 
-    //Test Stub to create minimal AbstractCar
+    @Test
+    public void addFuelShouldNotAddMoreFuelThanTankCapacity() {
+        Car car = AbstractCarTestStub.getInstance();
+        car.setRentalStatus(true);
+        int amountToRemove = 10;
+        car.drive(amountToRemove);
+        int amountToAdd = 20;
+        car.addFuel(amountToAdd);
+        Assert.assertTrue(car.getFuelRemaining() == car.getCapacity());
+    }
 
+    @Test
+    public void consumptionCalcShouldReturnFuelUsedIfCleanlyDivisibleByConsumptionRate() {
+        int distance = 20;
+        int consumptionRate = 10;
+        int fuelUsed = distance / consumptionRate;
+        Assert.assertTrue(AbstractCar.consumptionCalculator(distance, consumptionRate) == fuelUsed);
+    }
+
+    @Test
+    public void consumptionCalcShouldRoundUpFuelUsedIfNotCleanlyDivisibleByConsumptionRate() {
+        int distance = 1;
+        int consumptionRate = 10;
+        double fuelUsed = Math.ceil((double)distance / (double)consumptionRate);
+        Assert.assertTrue(AbstractCar.consumptionCalculator(distance, consumptionRate) == (int)fuelUsed);
+    }
+
+
+
+
+    //Test Stub to create minimal AbstractCar subclass
     private static class AbstractCarTestStub extends AbstractCar {
 
         protected static final int TANK_CAPACITY = 60;

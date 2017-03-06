@@ -40,18 +40,17 @@ public abstract class AbstractCar implements Car {
     }
 
     public int addFuel(int fuelToAdd) {
-        if (this.isRented || !this.isFull()) {
-            if (fuelToAdd + this.fuelAmount > this.tankCapacity) {
-                int amountAdded = this.tankCapacity - this.fuelAmount;
-                this.fuelAmount = this.tankCapacity;
-                return amountAdded;
-            } else {
-                this.fuelAmount = this.fuelAmount + fuelToAdd;
-                return fuelToAdd;
-            }
+        if (!this.isRented || this.isFull()) {
+            return 0;
+        } else if (fuelToAdd + this.fuelAmount > this.tankCapacity) {
+            int amountAdded = this.tankCapacity - this.fuelAmount;
+            this.fuelAmount = this.tankCapacity;
+            return amountAdded;
+        } else {
+            this.fuelAmount = this.fuelAmount + fuelToAdd;
+            return fuelToAdd;
         }
-        return 0;
-    };
+    }
 
     public abstract int drive(int distanceInKM);
 
