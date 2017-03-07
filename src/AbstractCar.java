@@ -54,7 +54,7 @@ public abstract class AbstractCar implements Car {
 
     public abstract int drive(int distanceInKM);
 
-    protected static int consumptionCalculator(int distance, int consumptionRate) {
+    protected static int consumptionCalc(int distance, int consumptionRate) {
         return distance / consumptionRate + (distance % consumptionRate == 0 ? 0 : 1);
     }
 

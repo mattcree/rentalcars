@@ -112,9 +112,9 @@ public class AbstractCarTest {
         int amountToAdd = 5;
         car.addFuel(amountToAdd);
         Assert.assertTrue(car.getFuelRemaining()
-                == car.getCapacity()
-                - amountToRemove
-                + amountToAdd);
+                                    == car.getCapacity()
+                                    - amountToRemove
+                                    + amountToAdd);
     }
 
     @Test
@@ -129,23 +129,20 @@ public class AbstractCarTest {
     }
 
     @Test
-    public void consumptionCalcShouldReturnFuelUsedIfCleanlyDivisibleByConsumptionRate() {
+    public void consumptionCalcShouldReturnFuelUsed() {
         int distance = 20;
         int consumptionRate = 10;
         int fuelUsed = distance / consumptionRate;
-        Assert.assertTrue(AbstractCar.consumptionCalculator(distance, consumptionRate) == fuelUsed);
+        Assert.assertTrue(AbstractCar.consumptionCalc(distance, consumptionRate) == fuelUsed);
     }
 
     @Test
-    public void consumptionCalcShouldRoundUpFuelUsedIfNotCleanlyDivisibleByConsumptionRate() {
+    public void consumptionCalcShouldRoundUpFuelUsed() {
         int distance = 1;
         int consumptionRate = 10;
         double fuelUsed = Math.ceil((double)distance / (double)consumptionRate);
-        Assert.assertTrue(AbstractCar.consumptionCalculator(distance, consumptionRate) == (int)fuelUsed);
+        Assert.assertTrue(AbstractCar.consumptionCalc(distance, consumptionRate) == (int)fuelUsed);
     }
-
-
-
 
     //Test Stub to create minimal AbstractCar subclass
     private static class AbstractCarTestStub extends AbstractCar {

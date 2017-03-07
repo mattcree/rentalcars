@@ -13,7 +13,7 @@ public class SmallCar extends AbstractCar {
 
     public int drive(int distanceInKM) {
         if (this.fuelAmount > 0) {
-            int fuelUsed = AbstractCar.consumptionCalculator(distanceInKM, CONSUMPTION_RATE);
+            int fuelUsed = AbstractCar.consumptionCalc(distanceInKM, CONSUMPTION_RATE);
             this.fuelAmount = this.fuelAmount - fuelUsed;
             return fuelUsed;
         }

@@ -1,29 +1,54 @@
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+
 /**
  * Created by Cree on 02/03/2017.
  */
 public class RentalCompany {
 
     private static final RentalCompany COMPANY = new RentalCompany();
+    private static final int NUMBER_OF_SMALL_CAR = 30;
+    private static final int NUMBER_OF_LARGE_CAR = 20;
+
+    private Map<DrivingLicence, Car> currentRentals;
+    private Queue<Car> smallCars;
+    private Queue<Car> largeCars;
 
     private RentalCompany() {
-
+        this.currentRentals = new HashMap<>();
+        this.smallCars = new LinkedList<>();
+        this.largeCars = new LinkedList<>();
     }
 
     public static RentalCompany getInstance() {
+
+
         return COMPANY;
     }
 
-    /*private int availableCars(typeOfCar)
+    protected static Queue<Car> carListGenerator(String typeOfCar, int numberOfCars) {
+        Queue<Car> carList = new LinkedList<>();
+        for(int i = 0; i < numberOfCars; i++) {
+            carList.add(CarFactory.getInstance(typeOfCar));
+        }
+        return carList;
+    }
+
+
+
+    /*public int availableCars(typeOfCar)
         returns the number of cars of the specified type that are available to rent.
 
-    private Collection getRentedCars()
+    public Collection getRentedCars()
         returns a collection of all the cars currently rented out (if any)
 
-    private Car getCar(drivingLicence)
+    public Car getCar(drivingLicence)
         Given a person's driving licence, this method
         returns the car they are currently renting(if any)
 
-    private boolean issueCar(drivingLicence, typeOfCar)
+    public boolean issueCar(drivingLicence, typeOfCar)
         Given
             a person's driving licence and
             a specification of the type of car required (small or large),
@@ -42,7 +67,7 @@ public class RentalCompany {
         Note, this does not have to indicate why a car cannot be issued, it simply indicates
         that a car cannot be issued. The rules for determining whether or not a car can be issued are given below.
 
-    private int terminateRental(drivingLicence)
+    public int terminateRental(drivingLicence)
         This method terminates the rental contract associated with the given driving licence.
         In effect, the driver is returning the car.
         The car is then available for rent by someone else.

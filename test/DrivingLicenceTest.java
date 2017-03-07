@@ -22,7 +22,8 @@ public class DrivingLicenceTest {
 
     @Test
     public void getDateOfBirthShouldReturnValidDateOfBirth() {
-
+        DrivingLicence licence = createLicence(1987, 1, 8, false);
+        Assert.assertNotNull(licence.getDateOfBirth());
     }
 
     @Test
