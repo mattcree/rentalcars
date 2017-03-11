@@ -21,15 +21,15 @@ public abstract class AbstractCar implements Car {
 
     public int getCapacity() {
         return this.tankCapacity;
-    };
+    }
 
     public int getFuelRemaining() {
         return this.fuelAmount;
-    };
+    }
 
     public boolean isFull() {
         return (this.tankCapacity == this.fuelAmount);
-    };
+    }
 
     public boolean isRented() {
         return this.isRented;

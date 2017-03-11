@@ -18,18 +18,16 @@ public class RentalCompany {
 
     private RentalCompany() {
         this.currentRentals = new HashMap<>();
-        this.smallCars = new LinkedList<>();
-        this.largeCars = new LinkedList<>();
+        this.smallCars = new LinkedList<>(carListGenerator("small", NUMBER_OF_SMALL_CAR));
+        this.largeCars = new LinkedList<>(carListGenerator("large", NUMBER_OF_LARGE_CAR));
     }
 
     public static RentalCompany getInstance() {
-
-
         return COMPANY;
     }
 
-    protected static Queue<Car> carListGenerator(String typeOfCar, int numberOfCars) {
-        Queue<Car> carList = new LinkedList<>();
+    protected static LinkedList<Car> carListGenerator(String typeOfCar, int numberOfCars) {
+        LinkedList<Car> carList = new LinkedList<>();
         for(int i = 0; i < numberOfCars; i++) {
             carList.add(CarFactory.getInstance(typeOfCar));
         }
@@ -38,18 +36,27 @@ public class RentalCompany {
 
 
 
-    /*public int availableCars(typeOfCar)
-        returns the number of cars of the specified type that are available to rent.
+    public int availableCars(String typeOfCar) {
+        return 0;
+    }
 
-    public Collection getRentedCars()
-        returns a collection of all the cars currently rented out (if any)
+    //returns a collection of all the cars currently rented out (if any)
+    public HashMap<DrivingLicence, Car> getRentedCars() {
+        return new HashMap<>();
+    }
 
-    public Car getCar(drivingLicence)
-        Given a person's driving licence, this method
+
+    public Car getCar(DrivingLicence licence) {
+        return new SmallCar();
+    }
+        /*Given a person's driving licence, this method
         returns the car they are currently renting(if any)
+*/
 
-    public boolean issueCar(drivingLicence, typeOfCar)
-        Given
+    public boolean issueCar(DrivingLicence Licence, String typeOfCar) {
+        return true;
+    }
+        /*Given
             a person's driving licence and
             a specification of the type of car required (small or large),
         this method determines whether the person is eligible to rent a car of the
@@ -65,9 +72,12 @@ public class RentalCompany {
                 the method returns an appropriate indication of the failure to issue a car.
 
         Note, this does not have to indicate why a car cannot be issued, it simply indicates
-        that a car cannot be issued. The rules for determining whether or not a car can be issued are given below.
+        that a car cannot be issued. The rules for determining whether or not a car can be issued are given below.*/
 
-    public int terminateRental(drivingLicence)
+    public int terminateRental(DrivingLicence licence) {
+        return 0;
+    }
+    /*
         This method terminates the rental contract associated with the given driving licence.
         In effect, the driver is returning the car.
         The car is then available for rent by someone else.

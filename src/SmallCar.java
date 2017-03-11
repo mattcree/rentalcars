@@ -6,7 +6,6 @@ public class SmallCar extends AbstractCar {
     private static final int TANK_CAPACITY = 49;
     private static final int CONSUMPTION_RATE = 20;
 
-
     public SmallCar(){
         super(TANK_CAPACITY, CONSUMPTION_RATE);
     }
@@ -19,4 +18,5 @@ public class SmallCar extends AbstractCar {
         }
         return -1;
     }
+
 }

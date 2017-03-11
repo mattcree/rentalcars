@@ -159,7 +159,7 @@ public class AbstractCarTest {
         }
 
         public int drive(int removeFuel) {
-            //Implementing simple fuel decrementer for testing
+            //Implementing simple fuel de-incrementer for testing
             this.fuelAmount = this.fuelAmount - removeFuel;
             return this.fuelAmount;
         }
