@@ -1,5 +1,6 @@
 /**
- * Created by Cree on 27/02/2017.
+ * Interface containing all the public behavior that any Car which uses
+ * it should implement.
  */
 public interface Car {
     public RegistrationNumber getRegNumber();

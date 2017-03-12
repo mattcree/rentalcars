@@ -41,8 +41,8 @@ public class RentalCompany {
     }
 
     //returns a collection of all the cars currently rented out (if any)
-    public HashMap<DrivingLicence, Car> getRentedCars() {
-        return new HashMap<>();
+    public Map<DrivingLicence, Car> getRentedCars() {
+        return this.currentRentals;
     }
 
 

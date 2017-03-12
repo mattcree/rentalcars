@@ -5,6 +5,7 @@ import org.junit.Test;
  * Created by Cree on 27/02/2017.
  */
 public class LicenceNumberTest {
+
     @Test
     public void createNewLicenseNumberShouldCreateValidLicenseNumber() {
         LicenceNumber.setSerial(0);
@@ -42,18 +43,17 @@ public class LicenceNumberTest {
     }
 
     @Test
-    public void getLicenseNumberShouldReturnFullLicenseNumberAsString() {
+    public void toStringShouldReturnFullLicenseNumberAsString() {
         LicenceNumber.setSerial(0);
         LicenceNumber number = createNumber();
         String firstNumber = "BB-1998-0";
-        String licenseSerial = number.getLicenseNumber();
+        String licenseSerial = number.toString();
         Assert.assertTrue(licenseSerial.equals(firstNumber));
     }
 
     //Helpers for object creation
     private String initials = "BB";
     private int issueYear = 1998;
-
     private LicenceNumber createNumber() {
         return new LicenceNumber(initials, issueYear);
     }
