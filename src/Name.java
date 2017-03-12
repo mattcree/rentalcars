@@ -1,7 +1,8 @@
 /**
  * A class representing a real world name. Only first name and last name.
+ * Class is immutable and cannot be subclassed.
  */
-public class Name {
+public final class Name {
 
     private String firstName;
     private String lastName;

@@ -3,9 +3,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Contains fields and behavior to represent a licence number for a Driving Licence.
  * Has a serial number which is assigned then incremented each time a new licence
- * number is created.
+ * number is created. Class is immutable and cannot be subclassed.
  */
-public class LicenceNumber {
+public final class LicenceNumber {
 
     //Static AtomicInteger which represents the current SERIAL_NUMBER i.e.
     //the next LicenceNumber to be created will use this current value then
@@ -30,7 +30,7 @@ public class LicenceNumber {
         this.serial = SERIAL_NUMBER.getAndIncrement();
     }
 
-    //Next three get methods probably not required, but
+    //Next three accessor methods probably not required, but
     //seem potentially useful.
 
     /**
@@ -68,7 +68,7 @@ public class LicenceNumber {
 
     //Package private static methods to help with tests
     //Sets the current SERIAL_NUMBER to newValue.
-    static void setSerial(int newValue) {
+    protected static void setSerial(int newValue) {
         SERIAL_NUMBER.set(newValue);
     }
 

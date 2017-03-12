@@ -8,7 +8,8 @@ public interface Car {
     public int getFuelRemaining();
     public boolean isFull();
     public boolean isRented();
-    public void setRentalStatus(boolean status);
     public int addFuel(int amount);
     public int drive(int distance);
+    public void setRentalStatus(boolean rentalStatus);
+
 }

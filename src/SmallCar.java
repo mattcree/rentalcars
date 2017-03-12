@@ -12,7 +12,7 @@ public class SmallCar extends AbstractCar {
      * values unique to SmallCar objects i.e. their tank capacity
      * and the rate(s) they consume fuel at.
      */
-    public SmallCar(){
+    protected SmallCar(){
         super(TANK_CAPACITY, CONSUMPTION_RATE);
     }
 

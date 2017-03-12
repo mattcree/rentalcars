@@ -6,7 +6,7 @@ public class LargeCar extends AbstractCar {
 
     //Static fields represent the the values required for car creation
     //which are unique to the LargeCar class. LargeCar has an extra consumption
-    //rate
+    //rate.
     private static final int TANK_CAPACITY = 60;
     private static final int CONSUMPTION_RATE = 10;
     private static final int CONSUMPTION_RATE_AFTER_50 = 15;
@@ -16,7 +16,7 @@ public class LargeCar extends AbstractCar {
      * values unique to LargeCar objects i.e. their tank capacity
      * and the rate(s) they consume fuel at.
      */
-    public LargeCar(){
+    protected LargeCar(){
         super(TANK_CAPACITY, CONSUMPTION_RATE);
     }
 

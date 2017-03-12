@@ -145,7 +145,7 @@ public class AbstractCarTest {
     }
 
     //Test Stub to create minimal AbstractCar subclass
-    private static class AbstractCarTestStub extends AbstractCar {
+    public static final class AbstractCarTestStub extends AbstractCar {
 
         protected static final int TANK_CAPACITY = 60;
         protected static final int CONSUMPTION_RATE = 10;
