@@ -25,9 +25,9 @@ public class LargeCar extends AbstractCar {
      * decrement the fuelAmount of the car by the distanceInKM param.
      * If the distance is over 50km the distance above 50km removes fuel
      * at a different rate (15km/L). The amount of fuel used is returned.
-     * Returns -1 if the car was not driven (i.e. tank was <=0 before driving).
-     * @param distanceInKM The distance to be driven
-     * @return The amount of fuel used during the journey.
+     * Returns -1 if the car was not driven (i.e. tank was  less than 1 before driving).
+     * @param distanceInKM The distance to be driven (Kilometers)
+     * @return The amount of fuel used during the journey (Litres)
      */
     public int drive(int distanceInKM) {
         if (this.fuelAmount > 0) {

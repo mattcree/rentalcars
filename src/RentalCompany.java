@@ -1,15 +1,18 @@
 import java.util.*;
 
 /**
- * Created by Cree on 02/03/2017.
+ * Class represents top level functions of rental company. Fields and methods
+ * concerned with managing car rentals, including issuing, returning, finding out
+ * the number of available cars etc.
  */
 public final class RentalCompany {
 
+    //protected static for access by tests
     protected static final int MAX_LARGE_CAR = 20;
     protected static final int MAX_SMALL_CAR = 30;
 
+    //Collections for cars
     private Map<DrivingLicence, Car> currentRentals;
-
     Queue<Car> smallCars;
     Queue<Car> largeCars;
 
@@ -66,38 +69,55 @@ public final class RentalCompany {
 
     /**
      * Issues a car under the following circumstances:
-     * - person renting the car must have a full driving licence
-     * - they cannot rent more than one car at a time
-     *- to rent a small car, they must be at least 21 years old and must have held their licence
-     * for at least 1 year
-     * -to rent a large car, they must be at least 25 years old and must have held their licence
+     * - Person renting the car must have a full driving licence.
+     * - They cannot rent more than one car at a time.
+     * - To rent a Small car, they must be at least 21 years old and must have held their licence
+     * for at least 1 year.
+     * - To rent a Large car, they must be at least 25 years old and must have held their licence
      * for at least 5 years
      * Car is removed from List, set as rented, and put into the current rentals.
      * Returns true for success, false if car was not issued.
-     * @param licence A driver's licence
-     * @param typeOfCar "small" or "large
+     * @param licence A driver's licence.
+     * @param typeOfCar "small" or "large.
      * @return True for success, false for no car issued.
      */
     public boolean issueCar(DrivingLicence licence, String typeOfCar) {
         if (!licence.isFullLicense() || this.getCar(licence) != null) return false;
         if (typeOfCar.equals("small") && eligibleForSmall(licence) && !smallCars.isEmpty()) {
             Car car = smallCars.poll();
-            car.setRentalStatus(true);
-            currentRentals.put(licence, car);
-            return true;
+            return finaliseRental(licence, car);
         }
         if (typeOfCar.equals("large") && eligibleForLarge(licence) && !largeCars.isEmpty()) {
             Car car = largeCars.poll();
-            car.setRentalStatus(true);
-            currentRentals.put(licence, car);
-            return true;
-        } else {
-            return false;
+            return finaliseRental(licence, car);
         }
+        return false;
     }
 
     /**
-     * Helper for determining eligibility for small car rental eligibility.
+     * This method terminates the rental contract associated with the given driving licence.
+     * The car is then returned to its respective list. If the tank was not full, the amount
+     * of fuel needed to refill the car is returned. The car is refilled at this point to be
+     * ready for future rentals.
+     * @param licence A driver's licence.
+     * @return A number representing the amount of fuel that was required to refill the tank.
+     */
+    public int terminateRental(DrivingLicence licence) {
+        Car rental = currentRentals.get(licence);
+        if (rental == null) return 0;
+        if (rental instanceof SmallCar) {
+            return finaliseTermination(licence, rental, smallCars);
+        }
+        if (rental instanceof LargeCar) {
+            return finaliseTermination(licence, rental, largeCars);
+        }
+        return 0;
+    }
+
+    //Helper Methods for readability of main methods & modularity
+
+    /**
+     * Helper for determining eligibility for small car rental.
      * Driver must be at least 21, and have had their licence for at least 1 year.
      * @param licence A driver's licence.
      * @return True if eligible, false if not.
@@ -109,7 +129,7 @@ public final class RentalCompany {
     }
 
     /**
-     * Helper for determining eligibility for large car rental eligibility.
+     * Helper for determining eligibility for large car rental.
      * Driver must be at least 25, and have had their licence for at least 5 year.
      * @param licence A driver's licence.
      * @return True if eligible, false if not.
@@ -119,31 +139,36 @@ public final class RentalCompany {
         return (DrivingLicence.differenceInYears(licence.getDateOfBirth(), today) >= 25) &&
                (DrivingLicence.differenceInYears(licence.getIssueDate(), today) >= 5);
     }
-    
+
     /**
-     *
-     * @param licence
-     * @return
+     * Processes a rental. Sets the cars rental status to true,
+     * and puts it into the currentRentals list.
+     * @param licence A driver's licence
+     * @param car A car
+     * @return True if processed successfully, false if some objects are null.
      */
-    public int terminateRental(DrivingLicence licence) {
-        Car rental = currentRentals.get(licence);
-        if (rental == null) {
-            return 0;
-        }
-        int refill = fillAndReturnAmount(rental);
-        if (rental instanceof SmallCar) {
-            currentRentals.remove(licence, rental);
-            rental.setRentalStatus(false);
-            smallCars.add(rental);
-            return refill;
-        }
-        if (rental instanceof LargeCar) {
-            currentRentals.remove(licence, rental);
-            rental.setRentalStatus(false);
-            largeCars.add(rental);
-            return refill;
-        }
-        return 0;
+    private boolean finaliseRental(DrivingLicence licence, Car car) {
+        if (car == null || licence == null) return false;
+        car.setRentalStatus(true);
+        currentRentals.put(licence, car);
+        return true;
+    }
+
+    /**
+     * Processes a return. Sets the cars rental status to false,
+     * and puts it into the relevant car list.
+     * @param licence A driver's licence
+     * @param car A car
+     * @param carList A collection of Car
+     * @return True if processed successfully, false if some objects are null.
+     */
+    private int finaliseTermination(DrivingLicence licence, Car car, Queue<Car> carList) {
+        if (car == null || licence == null || carList == null) return 0;
+        currentRentals.remove(licence, car);
+        int refill = fillAndReturnAmount(car);
+        car.setRentalStatus(false);
+        carList.add(car);
+        return refill;
     }
 
     /**
@@ -153,15 +178,14 @@ public final class RentalCompany {
      * @return The amount of fuel needed to fill it.
      */
     private int fillAndReturnAmount(Car car) {
+        if (car.isFull()) return 0;
         int fuelRemaining = car.getFuelRemaining();
         int capacity = car.getCapacity();
-        if (car.isFull()) {
-            return 0;
-        } else if (fuelRemaining < 0) {
+
+        if (fuelRemaining < 0) {
             return car.addFuel(capacity + Math.abs(fuelRemaining));
         }
         return car.addFuel(capacity - fuelRemaining);
     }
-
 
 }

@@ -44,7 +44,7 @@ public class RegistrationNumber {
 
     /**
      * Returns the letter component of the registration number.
-     * @return
+     * @return A character
      */
     public char getLetter() {
         return this.letter;
@@ -52,7 +52,7 @@ public class RegistrationNumber {
 
     /**
      * Returns the number portion of the registration number.
-     * @return
+     * @return The year of registration
      */
     public int getNumbers() {
         return this.numbers;
@@ -60,7 +60,7 @@ public class RegistrationNumber {
 
     /**
      * Returns a string representation of a full registration number.
-     * @return
+     * @return A full registration number
      */
     public String toString() {
         return String.valueOf(letter) + String.format("%04d", numbers);

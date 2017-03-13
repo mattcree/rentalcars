@@ -2,6 +2,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Queue;
@@ -10,12 +11,6 @@ import java.util.Queue;
  * Created by Cree on 07/03/2017.
  */
 public class RentalCompanyTest {
-
-    @After
-    public void tidy() {
-
-    }
-
 
     @Test
     public void getInstanceShouldReturnInstanceOfRentalClass() {
@@ -106,7 +101,6 @@ public class RentalCompanyTest {
         Date issueDate = calendar.getTime();
         DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
         company.issueCar(licence, "small");
-        System.out.println(company.getRentedCars());
         Assert.assertTrue(!company.getRentedCars().isEmpty());
     }
 
@@ -159,7 +153,6 @@ public class RentalCompanyTest {
         Date issueDate = calendar.getTime();
         DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
         company.issueCar(licence, "large");
-        System.out.println(company.getRentedCars());
         Assert.assertTrue(!company.getRentedCars().isEmpty());
     }
 
@@ -175,7 +168,6 @@ public class RentalCompanyTest {
         DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
         company.issueCar(licence, "small");
         company.issueCar(licence, "small");
-        System.out.println(company.getRentedCars());
         Assert.assertTrue(company.getRentedCars().size() == 1);
     }
 
@@ -190,7 +182,6 @@ public class RentalCompanyTest {
         DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
         company.issueCar(licence, "small");
         company.issueCar(licence, "large");
-        System.out.println(company.getRentedCars());
         Assert.assertTrue(company.getRentedCars().size() == 1);
     }
 
@@ -214,59 +205,36 @@ public class RentalCompanyTest {
         DrivingLicence licence2 = new DrivingLicence(name, dob2, issueDate2, true);
         company.issueCar(licence1, "small");
         company.issueCar(licence2, "large");
-        System.out.println(company.getRentedCars());
         Assert.assertTrue(company.getRentedCars().size() == 2);
     }
 
     @Test
     public void issueCarShouldRemoveSmallCarFromSmallCarList() {
         RentalCompany company = RentalCompany.getInstance();
-        Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         company.issueCar(licence, "small");
-        System.out.println(company.getRentedCars());
         Assert.assertTrue(company.availableCars("small") == RentalCompany.MAX_SMALL_CAR -1);
     }
 
     @Test
     public void issueCarShouldRemoveLargeCarFromLargeCarList() {
         RentalCompany company = RentalCompany.getInstance();
-        Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         company.issueCar(licence, "large");
-        System.out.println(company.getRentedCars());
         Assert.assertTrue(company.availableCars("large") == RentalCompany.MAX_LARGE_CAR -1);
     }
 
     @Test
     public void getCarShouldReturnNullIfNoCurrentlyRentedCar() {
         RentalCompany company = RentalCompany.getInstance();
-        Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         Assert.assertNull(company.getCar(licence));
     }
 
     @Test
     public void getCarShouldReturnCurrentlyRentedCar() {
         RentalCompany company = RentalCompany.getInstance();
-        Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         company.issueCar(licence, "small");
         Assert.assertNotNull(company.getCar(licence));
     }
@@ -274,12 +242,7 @@ public class RentalCompanyTest {
     @Test
     public void issueCarShouldChangeSmallCarRentalStatusToRented() {
         RentalCompany company = RentalCompany.getInstance();
-        Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         company.issueCar(licence, "small");
         Assert.assertTrue(company.getCar(licence).isRented());
     }
@@ -287,25 +250,45 @@ public class RentalCompanyTest {
     @Test
     public void issueCarShouldChangeLargeCarRentalStatusToRented() {
         RentalCompany company = RentalCompany.getInstance();
-        Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         company.issueCar(licence, "large");
         Assert.assertTrue(company.getCar(licence).isRented());
     }
 
     @Test
+    public void issueCarShouldNotIssueMoreSmallCarsThanAvailableCarWhenAllSmallCarsIssued() {
+        RentalCompany company = RentalCompany.getInstance();
+        ArrayList<DrivingLicence> licenceList = new ArrayList<>();
+        for(int i =0; i < company.availableCars("small") + 10; i++) {
+            licenceList.add(createValidLicenseOver25Over5YearsFullLicence());
+        }
+
+        for(DrivingLicence licence : licenceList) {
+            company.issueCar(licence, "small");
+        }
+
+        Assert.assertTrue(company.getRentedCars().size() == RentalCompany.MAX_SMALL_CAR);
+    }
+
+    @Test
+    public void issueCarShouldNotIssueMoreLargeCarsThanAvailableCarWhenAllLargeCarsIssued() {
+        RentalCompany company = RentalCompany.getInstance();
+        ArrayList<DrivingLicence> licenceList = new ArrayList<>();
+        for(int i =0; i < company.availableCars("large") + 10; i++) {
+            licenceList.add(createValidLicenseOver25Over5YearsFullLicence());
+        }
+
+        for(DrivingLicence licence : licenceList) {
+            company.issueCar(licence, "large");
+        }
+
+        Assert.assertTrue(company.getRentedCars().size() == RentalCompany.MAX_LARGE_CAR);
+    }
+
+    @Test
     public void terminateRentalShouldRemoveRentalFromCurrentRentals() {
         RentalCompany company = RentalCompany.getInstance();
-        Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         company.issueCar(licence, "small");
         company.terminateRental(licence);
         Assert.assertTrue(company.getRentedCars().isEmpty());
@@ -314,12 +297,7 @@ public class RentalCompanyTest {
     @Test
     public void terminateRentalShouldRemoveRentalFromCurrentRentalsAndSetRentalStatusToFalse() {
         RentalCompany company = RentalCompany.getInstance();
-        Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         company.issueCar(licence, "small");
         Car issuedCar = company.getCar(licence);
         company.terminateRental(licence);
@@ -329,12 +307,7 @@ public class RentalCompanyTest {
     @Test
     public void terminateRentalShouldReturnZeroIfTankWasFull() {
         RentalCompany company = RentalCompany.getInstance();
-        Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         company.issueCar(licence, "small");
         Car issuedCar = company.getCar(licence);
         Assert.assertTrue(company.terminateRental(licence) == 0);
@@ -344,11 +317,7 @@ public class RentalCompanyTest {
     public void terminateRentalShouldFillTankIfTankWasNotFullAndReturnAmount() {
         RentalCompany company = RentalCompany.getInstance();
         Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         company.issueCar(licence, "small");
         Car issuedCar = company.getCar(licence);
         issuedCar.drive(40);
@@ -359,12 +328,7 @@ public class RentalCompanyTest {
     @Test
     public void terminateRentalShouldReturnNumberOfLitresToFillIfTankWasNotFull() {
         RentalCompany company = RentalCompany.getInstance();
-        Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         company.issueCar(licence, "small");
         Car issuedCar = company.getCar(licence);
         issuedCar.drive(40);
@@ -374,18 +338,25 @@ public class RentalCompanyTest {
     @Test
     public void terminateRentalShouldReturnNumberOfLitresToFillIfTankWasLessThanZero() {
         RentalCompany company = RentalCompany.getInstance();
-        Name name = new Name("John", "Doe");
-        calendar.set(1980,1,1);
-        Date dob = calendar.getTime();
-        calendar.set(2010,1,1);
-        Date issueDate = calendar.getTime();
-        DrivingLicence licence = new DrivingLicence(name, dob, issueDate, true);
+        DrivingLicence licence = createValidLicenseOver25Over5YearsFullLicence();
         company.issueCar(licence, "small");
         Car issuedCar = company.getCar(licence);
         issuedCar.drive((issuedCar.getCapacity() + 1) * 20);
         Assert.assertTrue(company.terminateRental(licence) == 50);
     }
 
+    //Helper fields and methods for tests
     private Calendar calendar = Calendar.getInstance();
+
+    private DrivingLicence createValidLicenseOver25Over5YearsFullLicence() {
+        Name name = new Name("John", "Doe");
+        calendar.set(1980,1,1);
+        Date dob = calendar.getTime();
+        calendar.set(2010,1,1);
+        Date issueDate = calendar.getTime();
+        return new DrivingLicence(name, dob, issueDate, true);
+    }
+
+
 
 }

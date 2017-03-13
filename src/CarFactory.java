@@ -4,8 +4,6 @@
  */
 public class CarFactory {
 
-
-
     /**
      * A factory method which returns A SmallCar object
      * if typeOfCar equals "small" and a LargeCar object

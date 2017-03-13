@@ -19,6 +19,7 @@ public final class DrivingLicence {
      * Constructor for a DrivingLicence. All params required.
      * @param name A Name for the licence holder.
      * @param dob The licence holder's date of birth.
+     * @param issueDate The date of issue for the licence
      * @param licenseStatus True if the licence is full, false if not full.
      */
     public DrivingLicence(Name name, Date dob, Date issueDate, boolean licenseStatus){

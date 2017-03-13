@@ -22,8 +22,8 @@ public class SmallCar extends AbstractCar {
      * The amount of fuel used is returned.
      * Returns -1 if the car was not driven (i.e. fuel remaining
      * was less than 1 before driving).
-     * @param distanceInKM The distance to be driven
-     * @return The amount of fuel used during the journey.
+     * @param distanceInKM The distance to be driven (Kilometers)
+     * @return The amount of fuel used during the journey (Litres)
      */
     public int drive(int distanceInKM) {
         if (this.fuelAmount > 0) {

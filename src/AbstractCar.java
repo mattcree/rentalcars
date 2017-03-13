@@ -14,8 +14,8 @@ public abstract class AbstractCar implements Car {
      * Constructor for AbstractCar. TankCapacity and a rate of consumption
      * are required fields. New Cars default to having a full tank, are not
      * rented, and have a unique registration number assigned upon creation.
-     * @param tankCapacity
-     * @param consumptionRate
+     * @param tankCapacity A tank capacity in litres
+     * @param consumptionRate Rate that the car consumes fuel at (KM/L)
      */
     public AbstractCar(int tankCapacity, int consumptionRate) {
         this.registrationNumber = RegistrationNumber.getInstance();

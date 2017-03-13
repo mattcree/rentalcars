@@ -19,7 +19,7 @@ public final class Name {
 
     /**
      * Returns the first name
-     * @return
+     * @return first name
      */
     public String getFirstName() {
         return firstName;
@@ -27,7 +27,7 @@ public final class Name {
 
     /**
      * Returns the last name
-     * @return
+     * @return last name
      */
     public String getLastName() {
         return lastName;
@@ -35,7 +35,7 @@ public final class Name {
 
     /**
      * Returns a string of initials
-     * @return
+     * @return initials
      */
     public String getInitials() {
         return (firstName.substring(0,1) + lastName.substring(0,1)).toUpperCase();
@@ -44,7 +44,7 @@ public final class Name {
     /**
      * Returns a string representation of a full name,
      * first name plus last name.
-     * @return
+     * @return full name
      */
     public String toString() {
         return firstName + " " + lastName;
