@@ -9,7 +9,6 @@ public class RentalCompany {
     protected static final int MAX_LARGE_CAR = 20;
     protected static final int MAX_SMALL_CAR = 30;
 
-
     private Map<DrivingLicence, Car> currentRentals;
 
     Queue<Car> smallCars;
@@ -51,8 +50,34 @@ public class RentalCompany {
         return currentRentals.get(licence);
     }
 
-    public boolean issueCar(DrivingLicence Licence, String typeOfCar) {
-        return true;
+    public boolean issueCar(DrivingLicence licence, String typeOfCar) {
+        if (!licence.isFullLicense() || this.getCar(licence) != null) return false;
+        if (typeOfCar.equals("small") && eligibleForSmall(licence) && !smallCars.isEmpty()) {
+            Car car = smallCars.poll();
+            car.setRentalStatus(true);
+            currentRentals.put(licence, car);
+            return true;
+        }
+        if (typeOfCar.equals("large") && eligibleForLarge(licence) && !largeCars.isEmpty()) {
+            Car car = largeCars.poll();
+            car.setRentalStatus(true);
+            currentRentals.put(licence, car);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean eligibleForSmall(DrivingLicence licence) {
+        Date today = new Date();
+        return (DrivingLicence.differenceInYears(licence.getDateOfBirth(), today) >= 21) &&
+               (DrivingLicence.differenceInYears(licence.getIssueDate(), today) >= 1);
+    }
+
+    private boolean eligibleForLarge(DrivingLicence licence) {
+        Date today = new Date();
+        return (DrivingLicence.differenceInYears(licence.getDateOfBirth(), today) >= 25) &&
+               (DrivingLicence.differenceInYears(licence.getIssueDate(), today) >= 5);
     }
 
     public int terminateRental(DrivingLicence licence) {

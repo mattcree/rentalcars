@@ -100,10 +100,10 @@ public final class DrivingLicence {
         return licenceNumber.hashCode();
     }
 
-    public static int differenceInYears(Date dateOfBirth, Date today) {
+    public static int differenceInYears(Date pastDate, Date today) {
         int millisecondsInASecond = 1000;
         int secondsInAYear = 31556926;
-        long differenceInMilliseconds = today.getTime() - dateOfBirth.getTime();
+        long differenceInMilliseconds = today.getTime() - pastDate.getTime();
         return (int)(differenceInMilliseconds / millisecondsInASecond) / secondsInAYear;
     }
 
