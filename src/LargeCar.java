@@ -30,17 +30,15 @@ public class LargeCar extends AbstractCar {
      * @return The amount of fuel used during the journey (Litres)
      */
     public int drive(int distanceInKM) {
-        if (this.fuelAmount > 0) {
-            if (distanceInKM > 50) {
-                int fuelUsed = 5 + AbstractCar.consumptionCalc(distanceInKM - 50, CONSUMPTION_RATE_AFTER_50);
-                this.fuelAmount = this.fuelAmount - fuelUsed;
-                return fuelUsed;
-            } else {
-                int fuelUsed = AbstractCar.consumptionCalc(distanceInKM, CONSUMPTION_RATE);
-                this.fuelAmount = this.fuelAmount - fuelUsed;
-                return fuelUsed;
-            }
+        if (this.fuelAmount <= 0) return -1;
+        if (distanceInKM > 50) {
+            int fuelUsed = 5 + AbstractCar.consumptionCalc(distanceInKM - 50, CONSUMPTION_RATE_AFTER_50);
+            this.fuelAmount = this.fuelAmount - fuelUsed;
+            return fuelUsed;
+        } else {
+            int fuelUsed = AbstractCar.consumptionCalc(distanceInKM, CONSUMPTION_RATE);
+            this.fuelAmount = this.fuelAmount - fuelUsed;
+            return fuelUsed;
         }
-        return -1;
     }
 }

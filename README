@@ -1,0 +1,27 @@
+NAME OF PROJECT: 
+Car Rental Application
+
+
+NAME OF AUTHOR: 
+Matthew Cree
+
+
+VERSION NUMBER:
+1.0
+
+
+PURPOSE OF PROJECT:
+
+A set of interfaces and classes to manage car rentals.
+
+
+REQUIREMENTS: 
+
+Java 8
+IntelliJ IDEA (with junit 4.12 to run tests)
+
+LOCATION OF FILES:
+
+/src/ -- contains source files
+/tests/ -- contains all test files
+/javadoc/ -- contains all javadocs

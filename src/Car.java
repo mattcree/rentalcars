@@ -1,5 +1,5 @@
 /**
- * Interface containing all the public behavior that any Car which uses
+ * Interface containing all the public methods that any Car which uses
  * it should implement.
  */
 public interface Car {

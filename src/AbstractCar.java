@@ -82,12 +82,11 @@ public abstract class AbstractCar implements Car {
      * it will return the amount that could actually be added.
      */
     public int addFuel(int fuelToAdd) {
-        if (!this.isRented || this.isFull()) {
-            return 0;
-        } else if (fuelToAdd + this.fuelAmount > this.tankCapacity) {
-            int amountAdded = this.tankCapacity - this.fuelAmount;
+        if (!this.isRented || this.isFull()) return 0;
+        if (fuelToAdd + this.fuelAmount > this.tankCapacity) {
+            int fuelRequired = this.tankCapacity - this.fuelAmount;
             this.fuelAmount = this.tankCapacity;
-            return amountAdded;
+            return fuelRequired;
         } else {
             this.fuelAmount = this.fuelAmount + fuelToAdd;
             return fuelToAdd;

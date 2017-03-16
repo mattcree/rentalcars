@@ -25,8 +25,6 @@ public final class DrivingLicence {
     public DrivingLicence(Name name, Date dob, Date issueDate, boolean licenseStatus){
         this.name = name;
         this.dob = dob;
-        //Assumed that the issueDate should be the same
-        //as the time the license is created.
         this.issueDate = issueDate;
         this.licenseStatus = licenseStatus;
         CALENDAR.setTime(issueDate);
@@ -83,13 +81,9 @@ public final class DrivingLicence {
      * False if param object is different class or null.
      */
     public boolean equals(Object object) {
-        if (this == object)
-            return true;
-        if (object == null || getClass() != object.getClass())
-            return false;
-
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
         DrivingLicence that = (DrivingLicence) object;
-
         return licenceNumber.equals(that.licenceNumber);
     }
 
@@ -102,9 +96,11 @@ public final class DrivingLicence {
     }
 
     public static int differenceInYears(Date pastDate, Date today) {
+        //durations as variables for readability
         int millisecondsInASecond = 1000;
         int secondsInAYear = 31556926;
         long differenceInMilliseconds = today.getTime() - pastDate.getTime();
+        //Should return year rounded down to nearest whole number (i.e. 18 and a half returns 18)
         return (int)(differenceInMilliseconds / millisecondsInASecond) / secondsInAYear;
     }
 

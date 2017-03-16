@@ -18,14 +18,15 @@ public final class RentalCompany {
 
     private RentalCompany() {
         this.currentRentals = new HashMap<>();
-        smallCars = new LinkedList<>(carListGenerator("small", MAX_SMALL_CAR));
-        largeCars = new LinkedList<>(carListGenerator("large", MAX_LARGE_CAR));
+        this.smallCars = new LinkedList<>(carListGenerator("small", MAX_SMALL_CAR));
+        this.largeCars = new LinkedList<>(carListGenerator("large", MAX_LARGE_CAR));
     }
 
     public static RentalCompany getInstance() {
         return new RentalCompany();
     }
 
+    //Helper to populate car lists
     private static LinkedList<Car> carListGenerator(String typeOfCar, int numberOfCars) {
         LinkedList<Car> carList = new LinkedList<>();
         for(int i = 0; i < numberOfCars; i++) {
@@ -165,10 +166,10 @@ public final class RentalCompany {
     private int finaliseTermination(DrivingLicence licence, Car car, Queue<Car> carList) {
         if (car == null || licence == null || carList == null) return 0;
         currentRentals.remove(licence, car);
-        int refill = fillAndReturnAmount(car);
+        int refillAmount = fillAndReturnAmount(car);
         car.setRentalStatus(false);
         carList.add(car);
-        return refill;
+        return refillAmount;
     }
 
     /**
@@ -181,7 +182,6 @@ public final class RentalCompany {
         if (car.isFull()) return 0;
         int fuelRemaining = car.getFuelRemaining();
         int capacity = car.getCapacity();
-
         if (fuelRemaining < 0) {
             return car.addFuel(capacity + Math.abs(fuelRemaining));
         }

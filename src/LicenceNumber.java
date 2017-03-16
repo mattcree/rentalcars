@@ -68,6 +68,8 @@ public final class LicenceNumber {
 
     //Package private static methods to help with tests
     //Sets the current SERIAL_NUMBER to newValue.
+    //Static SERIAL causes issued between test instances since
+    //tests do not run in sequence written
     protected static void setSerial(int newValue) {
         SERIAL_NUMBER.set(newValue);
     }
